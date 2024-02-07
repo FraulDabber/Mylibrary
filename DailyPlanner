@@ -1,0 +1,22 @@
+from datetime import date, datetime
+
+tasks = []
+
+def add_task(task):
+    tasks.append({'task': task, 'time': datetime.now()})
+    return "Задача добавлена."
+
+def view_tasks():
+    return '\n'.join([f"{i + 1}. {t['task']} - добавлено в {t['time'].strftime('%H:%M:%S')}" for i, t in enumerate(tasks)])
+
+if __name__ == "__main__":
+    print("Простой планировщик задач на день:", date.today().strftime('%d.%m.%Y'))
+    while True:
+        action = input("Введите 'add' для добавления задачи или 'view' для просмотра списка: ")
+        if action == 'add':
+            task_description = input("Опишите задачу: ")
+            print(add_task(task_description))
+        elif action == 'view':
+            print(view_tasks())
+        else:
+            print("Неверная команда.")
