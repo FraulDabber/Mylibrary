@@ -1,0 +1,21 @@
+import csv
+import statistics
+
+def analyze_csv(file_path):
+    with open(file_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        numerical_data = {}
+        for row in reader:
+            for key, value in row.items():
+                if value and value.isdigit():
+                    if key not in numerical_data:
+                        numerical_data[key] = []
+                    numerical_data[key].append(int(value))
+        for key, values in numerical_data.items():
+            print(f"{key}:")
+            print(f"  Mean: {statistics.mean(values)}")
+            print(f"  Median: {statistics.median(values)}\n")
+
+if __name__ == "__main__":
+    file_path = input("Enter the path to the CSV file: ")
+    analyze_csv(file_path)
